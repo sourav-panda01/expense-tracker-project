@@ -1,17 +1,3 @@
-// let login=document.getElementById('b1')
-// login.addEventListener('click',()=>{
-//     axios.get("http://localhost:3000/expense")
-//     .then(expense=>{
-//         console.log(expense)
-//         let div=document.getElementById('expense')
-//         let cont=""
-//         for(leti=0;i<expense.data.length;i++){
-//             cont+=expense[i].data
-//         }
-//         div.innerHTML=cont
-//     })
-//     .catch(err=>console.log(err))
-// })
 const signup=document.getElementById('b2')
 console.log(signup.value)
 signup.addEventListener('click',()=>{
