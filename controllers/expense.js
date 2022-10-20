@@ -18,8 +18,8 @@ exports.getexpense=(req,res)=>{
 
 exports.addexpense = (req, res) => {
     console.log('in addexpense',req.body)
-    const { expenseamount, description, category } = req.body;
-    Expense.create({ expenseamount, description, category,userId:req.user.id }).then(expense => {
+    const { amount, description, category } = req.body;
+    Expense.create({ amount, description, category,userId:req.user.id }).then(expense => {
         return res.status(201).json({expense, success: true } );
     }).catch(err => {
         return res.status(403).json({success : false, error: err})

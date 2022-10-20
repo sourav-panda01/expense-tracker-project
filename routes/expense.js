@@ -12,6 +12,9 @@ router.post('/addexpense',authenticator.authenticator, expenseController.addexpe
 
 router.get('/getexpense',authenticator.authenticator, expenseController.getexpense)
 
+// router.get('/getallusers', expenseController.showExpensePremium)
+
+// router.get('/getallexpense/:id', expenseController.seeExpensePremium)
 
 router.delete('/deleteexpense/:id',authenticator.authenticator,expenseController.deleteexpense)
 

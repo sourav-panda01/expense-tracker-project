@@ -13,11 +13,11 @@ window.addEventListener('DOMContentLoaded', ()=> {
 });
 
 function showexpense(expense){
-    const parentElement = document.getElementById('listOfExpenses');
+    const parentElement = document.getElementById('expense');
     const expenseElemId = `expense-${expense.id}`;
     parentElement.innerHTML += `
         <li id=${expenseElemId}>
-            ${expense.expenseamount} - ${expense.category} - ${expense.description}
+            ${expense.amount} - ${expense.category} - ${expense.description}
             <button onclick='deleteExpense(event, ${expense.id})'>
                 Delete Expense
             </button>
@@ -63,4 +63,70 @@ function deleteExpense(e, expenseid) {
     }).catch((err => {
         document.body.innerHTML += `<div style="color:red;"> ${err}</div>`
     }))
+}
+
+// var paymentbtn=document.getElementById('rzpbutton')
+
+// paymentbtn.addEventListener('click',gopreimum())
+
+
+const URLTOBACKEND = "http://localhost:3000/";
+const EMAILID = "suravpanda601@gmail.com";
+const PHONENO = 7008527298;
+async function gopremium(event) {
+  const token = localStorage.getItem("token");
+  event.preventDefault();
+  const response = await axios.get("http://localhost:3000/premium", {
+    headers: { Authorization: token },
+  });
+  //console.log(response)
+  var options = {
+    key: response.data.key_id,
+    name: "Sourav Kumar Panda",
+    order_id: response.data.purchase.id,
+    prefill: {
+      name: "Sourav Kumar Panda",
+      email: `${EMAILID}`,
+      contact: `${PHONENO}`,
+    },
+    theme: {
+      color: "#3399cc",
+    },
+
+    handler: function (response) {
+      console.log(response,"sadsadasd");
+      axios
+        .post(
+          'http://localhost:3000/updatestatus',
+          {
+            purchaseId: options.order_id,
+            paymentId: response.razorpay_payment_id,
+          },
+          { headers: { Authorization: token } }
+        )
+        .then(() => {
+          alert("You are a Premium User Now");
+          document.querySelector(".nav").classList.add("premium");
+          document.querySelector(".wrapper").classList.add("premium");
+          document.querySelector(".footer").classList.add("premium");
+          let nav = document.getElementById("nav");
+          let btn = document.createElement("button");
+          nav.append(btn);
+          document.querySelector("#premiumbtn").remove();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  };
+
+  const rzp1 = new Razorpay(options);
+  rzp1.open();
+
+  rzp1.on("payment.failed", function (response) {
+    // alert(response.error.code);
+    // alert(response.error.description);
+
+    console.log(response);
+  });
 }

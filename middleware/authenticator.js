@@ -5,7 +5,7 @@ exports.authenticator = (req,res,next)=> {
 try{
     const token = req.header('Authorization')
     const user = jwt.verify(token,'secretkey')
-    console.log('hey hey hey hey hey ', user.userId)
+    console.log('User Id passing as req.user', user.userId)
     User.findByPk(user.userId)
     .then(user=>{
         req.user = user

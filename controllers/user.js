@@ -21,7 +21,10 @@ exports.signup = (req,res,next)=>{
         .then(user=>{
             res.status(201).json({message:'User Successfully Created'})
         })
-        .catch(err=>res.status(500).json({err:'Something Went wrong in outer catch'}))
+        .catch(err=>{
+            console.log(err)
+            res.status(500).json({err:'Something Went wrong in outer catch'})
+        })
 }
 
 function generateToken(id) {
