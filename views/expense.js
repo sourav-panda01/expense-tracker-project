@@ -13,14 +13,14 @@ window.addEventListener('DOMContentLoaded', ()=> {
 });
 
 function showexpense(expense){
-    const parentElement = document.getElementById('expense');
-    const expenseElemId = `expense-${expense.id}`;
-    parentElement.innerHTML += `
-        <li id=${expenseElemId}>
-            ${expense.amount} - ${expense.category} - ${expense.description}
-            <button onclick='deleteExpense(event, ${expense.id})'>
-                Delete Expense
-            </button>
+  const parentElement = document.getElementById('expense');
+  const expenseElemId = `expense-${expense.id}`;
+  parentElement.innerHTML += `
+      <li id=${expenseElemId}>
+          ${expense.amount} - ${expense.category} - ${expense.description}
+          <button onclick='deleteExpense(event, ${expense.id})'>
+          Delete Expense
+          </button>
 </li>`
 }
 
@@ -44,15 +44,18 @@ function addExpense(e){
     } else {
         throw new Error('Failed To create new expense');
     }
-
     }).catch(err => showError(err))
-
 }
-
-
 function deleteExpense(e, expenseid) {
-    const token = localStorage.getItem('token');
-    axios.delete(`http://localhost:3000/deleteexpense/${expenseid}`, { headers: {Authorization : token} })
+  console.log(expenseid,"this is expense id in front end")
+    const token =localStorage.getItem('token');
+    console.log(token)
+    let url=`http://localhost:3000/deleteexpense/${expenseid}`
+    let config={
+      headers: {Authorization: token}
+    }
+    console.log(config,"this is config")
+    axios.post(url,{},config)
     .then((response) => {
     if(response.status === 204){
             const expenseElemId = `expense-${expenseid}`;
@@ -65,9 +68,8 @@ function deleteExpense(e, expenseid) {
     }))
 }
 
-// var paymentbtn=document.getElementById('rzpbutton')
 
-// paymentbtn.addEventListener('click',gopreimum())
+
 
 
 const URLTOBACKEND = "http://localhost:3000/";
@@ -106,6 +108,8 @@ async function gopremium(event) {
         )
         .then(() => {
           alert("You are a Premium User Now");
+          window.location.href="http://127.0.0.1:5500/project/expenssetracker/views/premiumuser.html"
+
           document.querySelector(".nav").classList.add("premium");
           document.querySelector(".wrapper").classList.add("premium");
           document.querySelector(".footer").classList.add("premium");

@@ -60,70 +60,14 @@ exports.signin=(req,res,next) =>{
                 return res.status(404).json({message:'User does not exist'})
             }
         })
-
         .catch(err=>{
             res.status(500).json({message:err, success:false})
         })
 }
 
-
-// const User = require("../../expenssetracker/models/user")
-// const Expense = require("../../expenssetracker/models/expense")
-
-
-// exports.signin=(req,res)=>{
-//     console.log("entering signin")
-//     User.findAll({where:{email:req.body.email}})
-//     .then(user=>{
-//         if(user[0].password===req.body.password){
-//             res.status(201).json({message:'User Login Successfull'})
-//         }
-//         else{
-//             res.status(401).json({message:'Password not correct'})
-//         }
-//         res.redirect("http://127.0.0.1:5500/project/expenssetracker/views/expensetracker.html")
-//         console.log(user[0].name,user[0].email,user[0].password)
-//     })
-//     .catch(err=>res.status(404).json({message:' User not exist'}))
-    // User.findByPK(req.email)
-    // .then(user=>{
-    //     Expense.findAll({where:{id : user.id}})
-    //     .then(expense=> res.json(expense))
-    //     .catch(err=>console.log("noresp found",err)) 
-    // })
-    // .catch(err=>console.log("user not found",err))
-// }
+exports.forgotpassword=(req,res,next)=>{
+    const emailId=req.body.email
+    console.log(emailId)
 
 
-// exports.signup=(req,res)=>{
-//     console.log("inseidde signup")
-//     console.log(req.body)
-//     const {name,email,password} = req.body
-//     if(name == undefined || name.length === 0 
-//         || email == undefined || email.length === 0
-//         || password == undefined || password.length === 0)
-//         {
-//             return res.status(400).json({err:'Parameters Missing'})
-//         }
-//         User.create({name,email,password})
-//         .then(res.status(201).json({message:'User Successfully Created'}))
-//         .catch(err=>res.status(500).json({message:'Something went wrong'}))    
-// }
-
-
-// exports.signup=(req,res,next)=>{
-//     console.log(req.body,"----")
-//     const name=req.body.name
-//     const email=req.body.email
-//     const password=req.body.password
-//     console.log("inside controller signup",name,email,password)
-//     if(name == undefined || name.length === 0 
-//         || email == undefined || email.length === 0
-//         || password == undefined || password.length === 0)
-//         {
-//             return res.status(400).json({err:'Parameters Missing'})
-//         }
-//         User.create({name,email,password:hash})
-//         .then(res.status(201).json({message:'User Successfully Created'}))
-//         .catch(err=>res.status(500).json({message:'Something went wrong'}))
-// }
+}

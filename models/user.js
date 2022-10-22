@@ -18,7 +18,7 @@ const User = sequelize.define('user', {
   password:{
     type:Sequelize.STRING,
      },
-     isPremium:{
+  isPremium:{
       type:Sequelize.BOOLEAN,
       default:false
      }

@@ -7,6 +7,8 @@ login.addEventListener('click',()=>{
         localStorage.setItem('token',response.data.token)
         window.location.href="http://127.0.0.1:5500/project/expenssetracker/views/expensetracker.html"
     })
-    .catch(err=>console.log(err))
-
+    .catch(err=>{
+        alert(err.message)
+        console.log(err)
+    })
 });

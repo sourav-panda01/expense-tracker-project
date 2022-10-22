@@ -4,8 +4,9 @@ const Purchase = require("../models/purchase");
 
 exports.purchasePremium = async (req, res, next) => {
   console.log("inside purchase premium sadsadasd===-=----")
+  console.log(req,"----this is req")
   try {
-    console.log('Expense Tarcker',purchase.id)
+    //console.log('Expense Tarcker',purchase.id)
     var instance = new Razor_pay({
       key_id: process.env.Key_Id,
       key_secret: process.env.Key_Secret,
@@ -17,12 +18,11 @@ exports.purchasePremium = async (req, res, next) => {
         amount,
         currency: "INR",
       },
-
-      (error, purchase) => {
-        console.log(purchase)
-        if (error) {
-          throw new Error(error);
-        }
+    (error, purchase) => {
+      console.log(purchase)
+      if (error) {
+        throw new Error(error,"error in purchase");
+    }
         Purchase.create({ purchaseid: purchase.id, status: "PENDING" ,userId:req.user.id})
           .then(() => {
             return res.status(201).json({ purchase, key_id: instance.key_id });

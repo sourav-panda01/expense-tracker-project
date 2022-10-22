@@ -4,6 +4,7 @@
   
 </head>
 <body>
+  <h1 style="text-align:center">My Expenses</h1>
   <form onsubmit="addExpense(event)" style="text-align:center">
     <label>Choose expenseamount:</label>
     <input type="number" id="amount">
@@ -16,12 +17,12 @@
         <option value="fuel">fuel</option>
         <option value="food">food</option>
       </select>
-    <br>
+    <br><br>
     <button>Add Expense</button>
     </form>
     <button  id="rzpbutton" onclick="gopremium(event)">Buy Premium</button>
-   <div id="expense"></div>
-
+   <div id="expense"></div><br><br><br>
+   <a href="./premiumuser.html" ><button>Go to Premium</button></a>
    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
    <script src="expense.js"></script>
   

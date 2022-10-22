@@ -12,12 +12,12 @@ router.post('/addexpense',authenticator.authenticator, expenseController.addexpe
 
 router.get('/getexpense',authenticator.authenticator, expenseController.getexpense)
 
-// router.get('/getallusers', expenseController.showExpensePremium)
+router.post('/deleteexpense/:id',authenticator.authenticator, expenseController.deleteexpense)
 
-// router.get('/getallexpense/:id', expenseController.seeExpensePremium)
 
-router.delete('/deleteexpense/:id',authenticator.authenticator,expenseController.deleteexpense)
+router.get('/getallusers', expenseController.showallUserPremium)
 
+router.get('/getallexpense/:id', expenseController.seeExpenseOfUser)
 
 
 
